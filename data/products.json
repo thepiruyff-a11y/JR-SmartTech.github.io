@@ -1,0 +1,92 @@
+{
+  "prod_1": {
+    "id": "prod_1",
+    "name": "UltraSound X1",
+    "cat": "AUDÍFONOS",
+    "price": 199.99,
+    "stock": 15,
+    "img": "https://via.placeholder.com/300x300?text=UltraSound+X1",
+    "desc": "Audífonos inalámbricos con tecnología de cancelación de ruido. Batería de 48 horas, conectividad Bluetooth 5.3.",
+    "specs": [
+      "Tecnología Noise Cancellation",
+      "Batería 48 horas",
+      "Bluetooth 5.3",
+      "Peso: 215g"
+    ]
+  },
+  "prod_2": {
+    "id": "prod_2",
+    "name": "ChargePro 100W",
+    "cat": "CARGADORES",
+    "price": 79.99,
+    "stock": 32,
+    "img": "https://via.placeholder.com/300x300?text=ChargePro+100W",
+    "desc": "Cargador rápido de 100W con conexiones USB-C y Lightning. Ideal para laptops y dispositivos móviles.",
+    "specs": [
+      "Potencia 100W",
+      "Dual USB-C",
+      "Compatible Lightning",
+      "Seguridad avanzada"
+    ]
+  },
+  "prod_3": {
+    "id": "prod_3",
+    "name": "ProtectCase Pro",
+    "cat": "ACCESORIOS",
+    "price": 49.99,
+    "stock": 45,
+    "img": "https://via.placeholder.com/300x300?text=ProtectCase+Pro",
+    "desc": "Funda protectora con protección contra caídas de hasta 3 metros. Material premium antichoque.",
+    "specs": [
+      "Protección 3 metros",
+      "Material premium",
+      "Diseño ergonómico",
+      "Garantía 2 años"
+    ]
+  },
+  "prod_4": {
+    "id": "prod_4",
+    "name": "GlassShield Max",
+    "cat": "ACCESORIOS",
+    "price": 34.99,
+    "stock": 8,
+    "img": "https://via.placeholder.com/300x300?text=GlassShield+Max",
+    "desc": "Cristal templado con cobertura completa. Dureza 9H, protección anti-arañazos garantizada.",
+    "specs": [
+      "Dureza 9H",
+      "Cobertura completa",
+      "Anti-arañazos",
+      "Alta transparencia"
+    ]
+  },
+  "prod_5": {
+    "id": "prod_5",
+    "name": "PowerBank Elite",
+    "cat": "CARGADORES",
+    "price": 89.99,
+    "stock": 22,
+    "img": "https://via.placeholder.com/300x300?text=PowerBank+Elite",
+    "desc": "Batería externa 25000mAh con carga rápida de 65W. Múltiples puertos para cargar 3 dispositivos.",
+    "specs": [
+      "Capacidad 25000mAh",
+      "Carga 65W",
+      "3 puertos simultáneos",
+      "Pantalla LED"
+    ]
+  },
+  "prod_6": {
+    "id": "prod_6",
+    "name": "SoundMax Buds",
+    "cat": "AUDÍFONOS",
+    "price": 129.99,
+    "stock": 28,
+    "img": "https://via.placeholder.com/300x300?text=SoundMax+Buds",
+    "desc": "Auriculares True Wireless con sonido envolvente 360°. Micrófono con IA para llamadas claras.",
+    "specs": [
+      "True Wireless",
+      "Sonido 360°",
+      "Micrófono IA",
+      "Batería 12 horas"
+    ]
+  }
+}
