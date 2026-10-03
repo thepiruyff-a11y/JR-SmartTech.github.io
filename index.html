@@ -4,13 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JR SmartTec | Tecnología Futurista</title>
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <!-- Firebase -->
-    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-database.js"></script>
     
     <style>
         :root {
@@ -125,7 +120,6 @@
                     <div class="ml-10 flex items-baseline space-x-8">
                         <button onclick="showSection('home')" class="text-gray-300 hover:text-[#00f3ff] px-3 py-2 rounded-md text-sm font-medium font-orbitron transition-all">INICIO</button>
                         <button onclick="showSection('products')" class="text-gray-300 hover:text-[#00f3ff] px-3 py-2 rounded-md text-sm font-medium font-orbitron transition-all">PRODUCTOS</button>
-                        <button onclick="showSection('contact')" class="text-gray-300 hover:text-[#00f3ff] px-3 py-2 rounded-md text-sm font-medium font-orbitron transition-all">CONTACTO</button>
                     </div>
                 </div>
                 <div class="flex items-center space-x-2 sm:space-x-4">
@@ -140,7 +134,6 @@
 
     <main class="flex-grow w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
 
-        <!-- Inicio -->
         <section id="section-home" class="page-section">
             <div class="flex flex-col lg:flex-row items-center justify-between gap-12 mt-8">
                 <div class="lg:w-1/2 space-y-6">
@@ -161,7 +154,6 @@
             </div>
         </section>
 
-        <!-- Productos -->
         <section id="section-products" class="page-section hidden">
             <h2 class="text-4xl md:text-5xl font-orbitron font-bold mb-12 text-center">
                 Catálogo de <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#00f3ff] to-[#bc13fe]">Productos</span>
@@ -183,25 +175,13 @@
             </div>
 
             <div id="products-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Inyectado por JavaScript -->
-            </div>
-        </section>
-
-        <!-- Contacto -->
-        <section id="section-contact" class="page-section hidden">
-            <h2 class="text-4xl font-orbitron font-bold mb-12 text-center">Contacto</h2>
-            <div class="max-w-2xl mx-auto glass-panel p-8 rounded-2xl">
-                <form id="contact-form" class="space-y-4">
-                    <input type="text" placeholder="Tu nombre" class="w-full bg-gray-900/50 border border-gray-700 rounded px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#00f3ff]">
-                    <input type="email" placeholder="Tu email" class="w-full bg-gray-900/50 border border-gray-700 rounded px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#00f3ff]">
-                    <textarea placeholder="Tu mensaje" rows="5" class="w-full bg-gray-900/50 border border-gray-700 rounded px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#00f3ff]"></textarea>
-                    <button type="submit" class="w-full bg-[#00f3ff] text-black font-orbitron font-bold py-3 rounded hover:bg-white transition-all">ENVIAR</button>
-                </form>
+                <div class="col-span-full text-center text-gray-400 py-12">
+                    <p class="font-orbitron">Cargando productos...</p>
+                </div>
             </div>
         </section>
     </main>
 
-    <!-- Carrito lateral -->
     <div id="cart-overlay" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-[60]" onclick="toggleCart()"></div>
     <div id="cart-panel" class="fixed right-0 top-0 w-96 h-screen bg-[#050505] border-l border-[#00f3ff]/20 translate-x-full transition-transform duration-300 z-[65] flex flex-col">
         <div class="flex items-center justify-between p-6 border-b border-[#00f3ff]/20">
@@ -224,8 +204,13 @@
 
     <div id="toast-container" class="toast-container"></div>
 
-    <!-- Scripts -->
-    <script src="./firebase-shared.js"></script>
+    <!-- Firebase CDN -->
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-database.js"></script>
+    
+    <!-- Nuestro script -->
+    <script src="./firebase-shared-FIXED.js"></script>
+
     <script>
         let currentFilter = 'TODOS';
         let cart = [];
@@ -244,17 +229,26 @@
                 btn.classList.add('border-gray-600', 'text-gray-400');
             });
             document.querySelector(`[data-category="${category}"]`).classList.add('active', 'border-[#00f3ff]', 'text-[#00f3ff]');
-            document.querySelector(`[data-category="${category}"]`).classList.remove('border-gray-600', 'text-gray-400');
             renderProducts();
         }
 
         function renderProducts() {
             const container = document.getElementById('products-grid');
+            if (!window.productManager) {
+                container.innerHTML = '<div class="col-span-full text-center text-gray-400 py-12"><p class="font-orbitron">Esperando Firebase...</p></div>';
+                return;
+            }
+
             const allProducts = window.productManager.getAll();
-            
             let products = Object.values(allProducts);
+            
             if (currentFilter !== 'TODOS') {
                 products = products.filter(p => p.cat === currentFilter);
+            }
+
+            if (products.length === 0) {
+                container.innerHTML = '<div class="col-span-full text-center text-gray-400 py-12"><p class="font-orbitron">No hay productos disponibles</p></div>';
+                return;
             }
 
             container.innerHTML = products.map(product => `
@@ -265,11 +259,11 @@
                     <p class="text-[#bc13fe] font-orbitron text-xs mb-2 uppercase tracking-widest">${product.cat}</p>
                     <h3 class="text-white font-orbitron font-bold mb-2">${product.name}</h3>
                     <p class="text-gray-400 text-sm mb-4 line-clamp-2">${product.desc}</p>
-                    <div class="flex justify-between items-center">
+                    <div class="flex justify-between items-center mb-4">
                         <span class="text-[#00f3ff] font-orbitron font-bold">$${product.price.toFixed(2)}</span>
                         <span class="text-xs font-orbitron text-gray-400">${product.stock > 0 ? `${product.stock} disponibles` : 'Agotado'}</span>
                     </div>
-                    <button onclick="addToCart('${product.id}')" class="w-full mt-4 bg-[#00f3ff] text-black font-orbitron font-bold py-2 rounded hover:bg-white transition-all">
+                    <button onclick="addToCart('${product.id}')" class="w-full bg-[#00f3ff] text-black font-orbitron font-bold py-2 rounded hover:bg-white transition-all">
                         AGREGAR
                     </button>
                 </div>
@@ -277,6 +271,7 @@
         }
 
         function addToCart(productId, quantity = 1) {
+            if (!window.productManager) return;
             const product = window.productManager.getById(productId);
             if (!product) return;
 
@@ -322,7 +317,7 @@
                             <p class="text-[#00f3ff] text-sm font-bold mt-1">$${(item.price * item.quantity).toFixed(2)}</p>
                         </div>
                         <button onclick="removeFromCart(${index})" class="text-gray-500 hover:text-red-500 transition-colors p-2">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                            🗑️
                         </button>
                     </div>
                 `;
@@ -367,16 +362,22 @@
         }
 
         // Suscribirse a cambios
-        window.productManager.onChange((products) => {
-            if (!document.getElementById('section-products').classList.contains('hidden')) {
+        const checkProductManager = setInterval(() => {
+            if (window.productManager) {
+                window.productManager.onChange((products) => {
+                    if (!document.getElementById('section-products').classList.contains('hidden')) {
+                        renderProducts();
+                    }
+                });
                 renderProducts();
+                clearInterval(checkProductManager);
             }
-        });
+        }, 100);
 
         // Inicializar
         window.onload = async function() {
             showSection('home');
-            setTimeout(() => renderProducts(), 1000);
+            setTimeout(() => renderProducts(), 2000);
         };
     </script>
 </body>
