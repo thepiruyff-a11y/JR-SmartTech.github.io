@@ -5,13 +5,13 @@
 
 // ⭐ REEMPLAZA ESTO CON TUS CREDENCIALES
 const firebaseConfig = {
-  apiKey: "TU_API_KEY",
-  authDomain: "tu-proyecto.firebaseapp.com",
-  databaseURL: "https://tu-proyecto-default-rtdb.firebaseio.com",
-  projectId: "tu-proyecto",
-  storageBucket: "tu-proyecto.appspot.com",
-  messagingSenderId: "TU_MESSAGING_ID",
-  appId: "TU_APP_ID"
+  apiKey: "AIzaSyDeNidguZDb3mPwtv-4_M7iY3v_4I2YZ64",
+  authDomain: "jr-smarttech-7a905.firebaseapp.com",
+  databaseURL: "https://jr-smarttech-7a905-default-rtdb.firebaseio.com",
+  projectId: "jr-smarttech-7a905",
+  storageBucket: "jr-smarttech-7a905.firebasestorage.app",
+  messagingSenderId: "1040964022664",
+  appId: "1:1040964022664:web:f8f953a0d987ac266d0a3d"
 };
 
 console.log('📦 firebase-shared-JSDELIVR.js iniciando...');
