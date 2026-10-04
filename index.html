@@ -204,12 +204,12 @@
 
     <div id="toast-container" class="toast-container"></div>
 
-    <!-- Firebase CDN -->
-    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-database.js"></script>
+    <!-- Firebase CDN - jsDelivr (más confiable que gstatic) -->
+    <script src="https://cdn.jsdelivr.net/npm/firebase@10.0.0/firebase-app.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/firebase@10.0.0/firebase-database.min.js"></script>
     
     <!-- Nuestro script -->
-    <script src="./firebase-shared-WORKING.js"></script>
+    <script src="./firebase-shared-JSDELIVR.js"></script>
 
     <script>
         let currentFilter = 'TODOS';
